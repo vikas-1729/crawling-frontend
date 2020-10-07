@@ -1,9 +1,11 @@
 import { API_URLS } from '../helper/urls';
+import { historyFunction } from '../helper/utils';
 import {
   SEARCH_AGAIN_BLOG,
   SEARCH_FAILURE,
   SEARCH_START,
   SEARCH_SUCCESS,
+  UPDATE_HISTORY_TAG,
 } from './action-type';
 
 export function searchStart() {
@@ -32,16 +34,24 @@ export function searchAgain(blogsArray) {
     blogsArray,
   };
 }
+export function updateHistoryTag() {
+  return {
+    type: UPDATE_HISTORY_TAG,
+  };
+}
 export function search(tagName, startIndex = 1) {
   return (dispatch) => {
     dispatch(searchStart());
     const searchByTagUrl = API_URLS.searchByTag(tagName, startIndex);
+    console.log('url', tagName);
     fetch(searchByTagUrl)
       .then((response) => response.json())
       .then((data) => {
         console.log('ok 2', data);
         if (data.success) {
-          if (startIndex === 1) {
+          historyFunction.addTagToHistory(tagName);
+          dispatch(updateHistoryTag());
+          if (parseInt(startIndex) === 1) {
             dispatch(
               searchSuccess(
                 data.data.blogsArray,

@@ -4,4 +4,6 @@ export const API_URLS = {
   mostSearch: () => `${ROOT_API}/mostSearch`,
   searchByTag: (tag, index) =>
     `${ROOT_API}/searchByTag/${tag}?startIndex=${index}`,
+  linkToSearchComponent: (tag, index = 1) =>
+    `search?tagName=${tag}&startIndex=${index}`,
 };

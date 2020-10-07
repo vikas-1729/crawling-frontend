@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { search } from '../actions/search';
+import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   constructor(props) {
@@ -9,18 +9,18 @@ class Navbar extends Component {
       searchValue: '',
     };
   }
-  handleSubmit = () => {
-    let { searchValue } = this.state;
-    searchValue = searchValue.trim();
-    if (searchValue === false) {
-      return;
-    }
-    searchValue = searchValue.toLowerCase();
-    this.props.dispatch(search(searchValue));
-    this.setState({
-      searchValue: '',
-    });
-  };
+  // handleSubmit = () => {
+  //   let { searchValue } = this.state;
+  //   searchValue = searchValue.trim();
+  //   if (searchValue === false) {
+  //     return;
+  //   }
+  //   searchValue = searchValue.toLowerCase();
+  //   let searchUrl = `/search?tagName=${searchValue}&startIndex=1`;
+  //   this.setState({
+  //     searchValue: '',
+  //   });
+  // };
   render() {
     return (
       <div>
@@ -43,20 +43,30 @@ class Navbar extends Component {
                 });
               }}
             />
-            <button className="btn-submit" onClick={this.handleSubmit}>
+            <Link
+              className="link-submit"
+              to={`/search/?tagName=${this.state.searchValue}&startIndex=1`}
+            >
               <img
                 src="https://www.flaticon.com/svg/static/icons/svg/38/38298.svg"
                 className="search-icon"
                 alt="search"
               />
-            </button>
+            </Link>
           </div>
-          <div className="right-part">
-            <img
-              src="https://www.flaticon.com/svg/static/icons/svg/53/53133.svg"
-              className="logo"
-              alt="avataar"
-            />
+          <div className="right-div nav-links">
+            <ul>
+              <li className="history">
+                <Link to="/history">
+                  <span className="link">History</span>
+                </Link>
+              </li>
+              <li className="most-search-link">
+                <Link to="/mostSearch">
+                  <span className="link">MostSearch</span>
+                </Link>
+              </li>
+            </ul>
           </div>
         </nav>
       </div>

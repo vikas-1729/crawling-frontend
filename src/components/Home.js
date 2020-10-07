@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchMostSearchTag } from '../actions/tags';
-import { Cart, BlogList } from './index';
+import { Cart } from './index';
 class Home extends Component {
   componentDidMount() {
     this.props.dispatch(fetchMostSearchTag());
@@ -13,20 +13,9 @@ class Home extends Component {
     return (
       <div className="home">
         <div className="left-div">
-          <div className="cart-collection">
-            {' '}
-            <Cart className="releated-tags" input={result.releatedTags} />
-            <Cart className="most-search" input={mostSearchedTags} />
-            <Cart className="history" input={historyTags} />
-          </div>
+          <div className="cart-collection"></div>
         </div>
-        <div className="right-div">
-          <BlogList
-            blogs={result.blogsArray}
-            tagName={this.props.search.tagName}
-            inProgress={this.props.search.inProgress}
-          />
-        </div>
+        <div className="right-div"></div>
       </div>
     );
   }

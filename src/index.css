@@ -22,7 +22,7 @@ nav {
   height: 50px;
 }
 nav > .left-div {
-  width: 20%;
+  width: 25%;
 }
 nav .logo {
   height: 40px;
@@ -48,14 +48,17 @@ nav .search-container {
 input:focus {
   outline: none;
 }
-.btn-submit {
+.link-submit {
+  display: inline-block;
+  text-align: center;
   width: 10%;
   padding: 0.5px;
   border-radius: 3px;
   box-sizing: border-box;
   border: 1px solid #ef7917;
+  padding-top: 5px;
 }
-.btn-submit:hover,
+.link-submit:hover,
 .btn:hover {
   cursor: pointer;
 }
@@ -65,8 +68,38 @@ input:focus {
 .search-icon {
   height: 20px;
 }
-nav .right-part {
-  width: 25%;
+nav .right-div {
+  width: 34%;
+  display: flex;
+  color: #fff;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 22px;
+  justify-content: center;
+}
+nav .nav-links ul {
+  display: flex;
+  list-style-type: none;
+}
+nav .nav-links ul li {
+  padding: 0 4px;
+  margin-left: 15px;
+}
+nav .nav-links ul li a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+}
+nav .nav-links ul li a:hover {
+  text-decoration: underline;
+}
+nav .nav-links ul li:hover {
+  cursor: pointer;
+}
+
+nav .right-div div {
+  width: 50%;
 }
 /* home */
 .home {
@@ -95,10 +128,19 @@ nav .right-part {
 }
 
 /** BlogList**/
+.search-container {
+  display: flex;
+  padding: 10px;
+}
+.search-container .left-div {
+  width: 35%;
+
+  padding: 5px 5px;
+}
 .blog-list {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 60%;
   padding: 5px 5px;
   justify-content: space-between;
 }
@@ -176,26 +218,6 @@ nav .right-part {
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.cart {
-  width: 50%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.cart .cart-item {
-  border-radius: 10px;
-  border: 1px solid #e0e0e0;
-  box-sizing: border-box;
-  padding: 2px;
-  height: 25px;
-  margin-left: 5px;
-}
-.cart .cart-item span {
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1rem;
-  line-height: 19px;
-}
 .small-icon {
   height: 20px;
   width: 20px;
@@ -208,6 +230,8 @@ nav .right-part {
   text-decoration: none;
   color: blue;
   font-weight: 600;
+  font-size: 1.2rem;
+  margin: 5px 0 5px 0;
 }
 /** btn list**/
 .btn-footer {
@@ -227,4 +251,120 @@ nav .right-part {
 }
 .btn-backward {
   float: left;
+}
+/** Most search**/
+.most-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  font-size: 1.5rem;
+  font-weight: bolder;
+  text-align: center;
+  word-spacing: 0.5rem;
+}
+.most-search .body {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.most-search .tag-item {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid grey;
+  margin-top: 10px;
+}
+.most-search .link-search {
+  text-decoration: none;
+}
+.most-search span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.3rem;
+  line-height: 19px;
+  padding: 5px 5px;
+}
+/** reletaed tags**/
+.releated-tags {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.releated-tags .releated-tags-item {
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+  /* box-sizing: border-box; */
+  padding: 2px;
+  /* height: 25px; */
+  margin-left: 5px;
+  font-size: 1.5rem;
+  min-width: 50px;
+  text-align: center;
+  margin-top: 10px;
+}
+.releated-tags .releated-tags-item span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 19px;
+}
+.link-search {
+  text-decoration: none;
+}
+
+.history {
+  width: 60%;
+  padding: 5px 5px;
+}
+.history header {
+  text-align: center;
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+.history .sub-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+.history .sub-header h3 {
+  text-align: center;
+}
+
+.history .history-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5px;
+}
+.history .history-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+.history .history-item span {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1rem;
+  line-height: 19px;
+}
+
+.delete-icon {
+  height: 50px;
+  width: 50px;
+}
+.btn-del {
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: 25%;
 }

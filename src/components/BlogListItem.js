@@ -11,7 +11,9 @@ class BlogListItem extends Component {
             <span className="blog-title">{blogInfo.title}</span>
             <span className="blog-subtitle">{blogInfo.subtitle}</span>
           </div>
-          <Link className="link-to-read">ReadMe</Link>
+          <Link to="#" className="link-to-read">
+            ReadMe
+          </Link>
           <div className="blog-response-info">
             <span className="blog-date">{blogInfo.time}</span>
             <span className="blog-time">{blogInfo.readTime}</span>

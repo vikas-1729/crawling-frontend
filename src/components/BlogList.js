@@ -2,14 +2,36 @@ import React from 'react';
 import { search } from '../actions/search';
 import { connect } from 'react-redux';
 import { BlogListItem } from './index';
+import queryString from 'query-string';
+import ReleatedTags from './ReleatedTags';
 class BlogList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       startIndex: 0,
-      page: 2,
+      page: 1,
     };
   }
+  componentDidMount() {
+    const url = this.props.location.search;
+    let query = queryString.parse(url);
+    this.props.dispatch(search(query.tagName, query.startIndex));
+  }
+  componentDidUpdate(prevProps, prevState) {
+    const urlPrev = prevProps.location.search;
+    const prevQuery = queryString.parse(urlPrev);
+    const urlCurr = this.props.location.search;
+    const currQuery = queryString.parse(urlCurr);
+    if (prevQuery && currQuery && prevQuery.tagName !== currQuery.tagName) {
+      //dispatch an action
+      this.props.dispatch(search(currQuery.tagName, 1));
+      this.setState({
+        startIndex: 0,
+        page: 1,
+      });
+    }
+  }
+
   increaseStartIndex = () => {
     this.setState({
       startIndex: this.state.startIndex + 10,
@@ -24,32 +46,31 @@ class BlogList extends React.Component {
     });
   };
   fetchMoreBlogs = () => {
-    let searchValue = this.props.tagName;
+    let searchValue = this.props.search.tagName;
     searchValue = searchValue.trim();
     if (searchValue === '') {
       return;
     }
-    searchValue = searchValue.toLowerCase();
-    this.props.dispatch(search(searchValue, this.state.page));
     this.setState({
       page: this.state.page + 1,
     });
+
+    this.props.dispatch(search(searchValue, this.state.page));
   };
   render() {
-    const { blogs, inProgress } = this.props;
+    const { result, inProgress } = this.props.search;
+    const {} = result;
+    const { blogsArray: blogs, releatedTags } = result;
     if (inProgress) {
       return <h1>Loading .wait a minute ..</h1>;
     }
-    let blogsArray = [];
+    let tempArray = [];
     let lastIndex = 0;
     if (blogs.length > 0) {
       lastIndex = this.state.startIndex + 10;
     }
-    if (
-      lastIndex >= blogs.length &&
-      blogs.length > 0 &&
-      this.props.inProgress === false
-    ) {
+    if (lastIndex >= blogs.length && blogs.length > 0 && inProgress === false) {
+      console.log('okk i am here');
       this.fetchMoreBlogs();
     } else {
       for (
@@ -57,42 +78,55 @@ class BlogList extends React.Component {
         i < lastIndex && lastIndex < blogs.length;
         i++
       ) {
-        blogsArray.push(blogs[i]);
+        tempArray.push(blogs[i]);
       }
     }
-    console.log('blogs', blogsArray.length, blogsArray);
+
+    console.log('blogs', tempArray, lastIndex, blogs.length);
     return (
-      <div className="blog-list">
-        {blogsArray.map((blog) => {
-          return (
-            <BlogListItem
-              blog={blog}
-              key={blog._id}
-              nextPage={this.increaseStartIndex}
-              prevPage={this.decreaseStartIndex}
-            />
-          );
-        })}
-        <div className="btn-list-footer">
-          {lastIndex <= blogs.length && lastIndex > 0 && (
-            <button
-              className="btn btn-forward"
-              onClick={this.increaseStartIndex}
-            >
-              See Next
-            </button>
-          )}
-          {this.state.startIndex >= 10 && (
-            <button
-              className="btn btn-backword"
-              onClick={this.decreaseStartIndex}
-            >
-              See Prev
-            </button>
-          )}
+      <div className="search-container">
+        <div className="left-div">
+          <header style={{ textAlign: 'initial' }}>Relaeted tags</header>
+          <ReleatedTags input={releatedTags} />
+        </div>
+        <div className="blog-list">
+          {tempArray.map((blog) => {
+            return (
+              <BlogListItem
+                blog={blog}
+                key={blog._id}
+                nextPage={this.increaseStartIndex}
+                prevPage={this.decreaseStartIndex}
+              />
+            );
+          })}
+          <div className="btn-list-footer">
+            {lastIndex <= blogs.length && lastIndex > 0 && (
+              <button
+                className="btn btn-forward"
+                onClick={this.increaseStartIndex}
+              >
+                See Next
+              </button>
+            )}
+            {this.state.startIndex >= 10 && (
+              <button
+                className="btn btn-backword"
+                onClick={this.decreaseStartIndex}
+              >
+                See Prev
+              </button>
+            )}
+          </div>
         </div>
       </div>
     );
   }
 }
-export default connect()(BlogList);
+function mapToState(state) {
+  console.log('state', state);
+  return {
+    search: state.search,
+  };
+}
+export default connect(mapToState)(BlogList);
