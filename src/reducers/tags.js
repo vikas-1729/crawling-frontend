@@ -3,7 +3,6 @@ import {
   UPDATE_HISTORY_TAG,
 } from '../actions/action-type';
 let history = localStorage.getItem('history');
-console.log('history', history);
 if (history === null) {
   history = [];
 } else {

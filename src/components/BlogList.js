@@ -60,7 +60,6 @@ class BlogList extends React.Component {
   };
   render() {
     const { result, inProgress } = this.props.search;
-    const {} = result;
     const { blogsArray: blogs, releatedTags } = result;
     if (inProgress) {
       return <h1>Loading .wait a minute ..</h1>;
@@ -130,7 +129,6 @@ class BlogList extends React.Component {
   }
 }
 function mapToState(state) {
-  console.log('state', state);
   return {
     search: state.search,
   };

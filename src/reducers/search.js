@@ -2,6 +2,7 @@ import {
   FETCH_CONTENT_FAILURE,
   FETCH_CONTENT_START,
   FETCH_CONTENT_SUCCESS,
+  NO_RESULT_FOUND,
   SEARCH_AGAIN_BLOG,
   SEARCH_FAILURE,
   SEARCH_START,
@@ -71,6 +72,16 @@ export default function (state = initialState, action) {
         inProgress: false,
         error: action.error,
         content: '',
+      };
+    case NO_RESULT_FOUND:
+      return {
+        ...state,
+        tagName: '',
+        result: {
+          ...state.result,
+          blogsArray: [],
+          releatedTags: [],
+        },
       };
 
     default:

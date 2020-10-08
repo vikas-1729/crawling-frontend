@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { API_URLS } from '../helper/urls';
 
 class Navbar extends Component {
   constructor(props) {
@@ -9,18 +10,14 @@ class Navbar extends Component {
       searchValue: '',
     };
   }
-  // handleSubmit = () => {
-  //   let { searchValue } = this.state;
-  //   searchValue = searchValue.trim();
-  //   if (searchValue === false) {
-  //     return;
-  //   }
-  //   searchValue = searchValue.toLowerCase();
-  //   let searchUrl = `/search?tagName=${searchValue}&startIndex=1`;
-  //   this.setState({
-  //     searchValue: '',
-  //   });
-  // };
+  handleSubmit = (e) => {
+    const { searchValue } = this.state;
+    if (searchValue) {
+      if (e.key === 'Enter') {
+        window.location.href = `${API_URLS.linkToSearchComponent(searchValue)}`;
+      }
+    }
+  };
   render() {
     return (
       <div>
@@ -42,6 +39,7 @@ class Navbar extends Component {
                   searchValue: e.target.value,
                 });
               }}
+              onKeyPress={this.handleSubmit}
             />
             <Link
               className="link-submit"
@@ -54,6 +52,7 @@ class Navbar extends Component {
               />
             </Link>
           </div>
+
           <div className="right-div nav-links">
             <ul>
               <li className="history">

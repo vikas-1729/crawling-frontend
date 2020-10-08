@@ -1,6 +1,7 @@
 import { API_URLS } from '../helper/urls';
 import { getFormBody, historyFunction } from '../helper/utils';
 import {
+  NO_RESULT_FOUND,
   SEARCH_AGAIN_BLOG,
   SEARCH_FAILURE,
   SEARCH_START,
@@ -70,6 +71,8 @@ export function search(tagName, startIndex = 1) {
             }
 
             return;
+          } else {
+            dispatch(noResultFound());
           }
         }
         dispatch(searchFailure(data.message));
@@ -77,5 +80,10 @@ export function search(tagName, startIndex = 1) {
       .catch((err) => {
         console.log('err', err);
       });
+  };
+}
+export function noResultFound() {
+  return {
+    type: NO_RESULT_FOUND,
   };
 }
