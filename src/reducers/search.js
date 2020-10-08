@@ -1,4 +1,7 @@
 import {
+  FETCH_CONTENT_FAILURE,
+  FETCH_CONTENT_START,
+  FETCH_CONTENT_SUCCESS,
   SEARCH_AGAIN_BLOG,
   SEARCH_FAILURE,
   SEARCH_START,
@@ -13,6 +16,7 @@ let initialState = {
   },
   inProgress: false,
   tagName: '',
+  content: '',
 };
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -47,6 +51,26 @@ export default function (state = initialState, action) {
           blogsArray: state.result.blogsArray.concat(action.blogsArray),
         },
         inProgress: false,
+      };
+    case FETCH_CONTENT_START:
+      return {
+        ...state,
+        inProgress: true,
+        error: null,
+      };
+    case FETCH_CONTENT_SUCCESS:
+      return {
+        ...state,
+        inProgress: false,
+        content: action.data,
+        error: null,
+      };
+    case FETCH_CONTENT_FAILURE:
+      return {
+        ...state,
+        inProgress: false,
+        error: action.error,
+        content: '',
       };
 
     default:

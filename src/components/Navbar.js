@@ -45,7 +45,7 @@ class Navbar extends Component {
             />
             <Link
               className="link-submit"
-              to={`/search/?tagName=${this.state.searchValue}&startIndex=1`}
+              to={`/search/?tagName=${this.state.searchValue}`}
             >
               <img
                 src="https://www.flaticon.com/svg/static/icons/svg/38/38298.svg"
@@ -64,6 +64,11 @@ class Navbar extends Component {
               <li className="most-search-link">
                 <Link to="/mostSearch">
                   <span className="link">MostSearch</span>
+                </Link>
+              </li>
+              <li className="home">
+                <Link to="/">
+                  <span className="link">Home</span>
                 </Link>
               </li>
             </ul>

@@ -20,7 +20,7 @@ class MostSearch extends Component {
               <div className="tag-item" key={tag._id}>
                 <Link
                   className="link-search"
-                  to={API_URLS.linkToSearchComponent(tag.tag, 1)}
+                  to={API_URLS.linkToSearchComponent(tag.tag)}
                 >
                   <span className="tag-name">{tag.tag.toUpperCase()}</span>
                 </Link>

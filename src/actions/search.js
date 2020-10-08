@@ -1,5 +1,5 @@
 import { API_URLS } from '../helper/urls';
-import { historyFunction } from '../helper/utils';
+import { getFormBody, historyFunction } from '../helper/utils';
 import {
   SEARCH_AGAIN_BLOG,
   SEARCH_FAILURE,
@@ -44,7 +44,13 @@ export function search(tagName, startIndex = 1) {
     dispatch(searchStart());
     const searchByTagUrl = API_URLS.searchByTag(tagName, startIndex);
     console.log('url', tagName);
-    fetch(searchByTagUrl)
+    fetch(searchByTagUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: getFormBody({ startIndex }),
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log('ok 2', data);

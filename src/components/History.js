@@ -15,7 +15,6 @@ class History extends Component {
   };
   render() {
     const { historyTags } = this.props;
-    console.log('val', historyTags);
     if (historyTags.length === 0) {
       return <h1>No History</h1>;
     }
@@ -24,7 +23,7 @@ class History extends Component {
         <header>History</header>
         <div className="sub-header">
           <h3>Tag</h3>
-          <h3>No of Time Searched</h3>
+          <h3>Hit Count</h3>
           <h3>Recently Search</h3>
           <h3>Delete</h3>
         </div>
@@ -32,7 +31,7 @@ class History extends Component {
           {historyTags.map((obj, index) => {
             return (
               <div className="history-item" key={index}>
-                <Link to={API_URLS.linkToSearchComponent(obj.tag, 1)}>
+                <Link to={API_URLS.linkToSearchComponent(obj.tag)}>
                   <span>{obj.tag}</span>
                 </Link>
                 <span>{obj.hitCount}</span>
@@ -58,7 +57,7 @@ class History extends Component {
         </div>
         {historyTags.length > 0 && (
           <button
-            className="btn-del"
+            className="btn-del-all"
             onClick={() => {
               historyFunction.deleteAll();
               this.props.dispatch(updateHistoryTag());

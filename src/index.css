@@ -349,12 +349,13 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid grey;
 }
-.history .history-item span {
+.history .history-item a span {
   font-style: normal;
   font-weight: normal;
-  font-size: 1rem;
+  font-size: 1.2rem;
   line-height: 19px;
 }
 
@@ -362,9 +363,16 @@ header {
   height: 50px;
   width: 50px;
 }
-.btn-del {
+.btn-del-all {
   cursor: pointer;
   position: absolute;
   right: 5%;
   top: 25%;
+}
+.content {
+  padding: 10px;
+}
+.content img,
+content button {
+  display: none;
 }

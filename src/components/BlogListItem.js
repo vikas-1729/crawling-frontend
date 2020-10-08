@@ -11,7 +11,15 @@ class BlogListItem extends Component {
             <span className="blog-title">{blogInfo.title}</span>
             <span className="blog-subtitle">{blogInfo.subtitle}</span>
           </div>
-          <Link to="#" className="link-to-read">
+          <Link
+            to={{
+              pathname: '/showContent',
+              state: {
+                url: blogInfo.linkToRead,
+              },
+            }}
+            className="link-to-read"
+          >
             ReadMe
           </Link>
           <div className="blog-response-info">

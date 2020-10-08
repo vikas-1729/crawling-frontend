@@ -10,7 +10,7 @@ function ReleatedTags(props) {
         return (
           <div className="releated-tags-item" key={value._id}>
             <Link
-              to={API_URLS.linkToSearchComponent(value.tag, 1)}
+              to={API_URLS.linkToSearchComponent(value.tag)}
               className="link-search"
             >
               <span>{value.tag}</span>
