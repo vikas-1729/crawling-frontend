@@ -104,17 +104,32 @@ nav .right-div div {
 /* home */
 .home {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   padding: 5px 5px;
-  align-items: baseline;
   justify-content: space-between;
 }
+.home header {
+  margin: 10px;
+}
+.home-body {
+  display: flex;
+  flex-direction: row;
+  padding: 5px 5px;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
 .home .left-div {
   width: 45%;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   padding: 5px 5px;
+}
+.home .main-img {
+  height: 500px;
+  background-image: url(https://bigdata-madesimple.com/wp-content/uploads/2019/02/web-crawlers.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
 }
 /*.releated-tags,
 .most-search,
@@ -123,8 +138,12 @@ nav .right-div div {
   width: 45%;
 }*/
 .home .right-div {
-  width: 70%;
+  width: 45%;
   padding: 5px 5px;
+}
+.home .right-div p {
+  font-size: large;
+  word-spacing: 1rem;
 }
 
 /** BlogList**/
@@ -368,6 +387,9 @@ header {
   position: absolute;
   right: 5%;
   top: 25%;
+}
+.btn-del {
+  cursor: pointer;
 }
 .content {
   padding: 10px;

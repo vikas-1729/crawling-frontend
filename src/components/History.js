@@ -78,7 +78,6 @@ class History extends Component {
   }
 }
 function mapToState(state) {
-  console.log(state.tags);
   return {
     historyTags: state.tags.historyTags,
   };

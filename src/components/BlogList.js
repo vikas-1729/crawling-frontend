@@ -24,6 +24,7 @@ class BlogList extends React.Component {
     const currQuery = queryString.parse(urlCurr);
     if (prevQuery && currQuery && prevQuery.tagName !== currQuery.tagName) {
       //dispatch an action
+
       this.props.dispatch(search(currQuery.tagName, 1));
       this.setState({
         startIndex: 0,
@@ -70,7 +71,6 @@ class BlogList extends React.Component {
       lastIndex = this.state.startIndex + 10;
     }
     if (lastIndex >= blogs.length && blogs.length > 0 && inProgress === false) {
-      console.log('okk i am here');
       this.fetchMoreBlogs();
     } else {
       for (
@@ -82,11 +82,17 @@ class BlogList extends React.Component {
       }
     }
 
-    console.log('blogs', tempArray, lastIndex, blogs.length);
     return (
       <div className="search-container">
         <div className="left-div">
-          <header style={{ textAlign: 'initial' }}>Relaeted tags</header>
+          {releatedTags.length === 0 ? (
+            <header>
+              No Result Found try for most searched or look into history
+            </header>
+          ) : (
+            <header>Releated tags</header>
+          )}
+
           <ReleatedTags input={releatedTags} />
         </div>
         <div className="blog-list">

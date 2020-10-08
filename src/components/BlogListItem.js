@@ -44,17 +44,17 @@ class BlogListItem extends Component {
             </div>
           </div>
           <div className="author">
-            <Link to="#">
+            <a href={author.nameLink}>
               <span className="author-name">Written By {author.name}</span>
-            </Link>
-            <Link to="#">
+            </a>
+            <a href={author.communityLink}>
               {' '}
               <span className="author-community">
                 {author.community.length > 0
                   ? `from Community  ${author.community}`
                   : ''}
               </span>
-            </Link>
+            </a>
           </div>
         </div>
       </div>

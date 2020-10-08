@@ -41,9 +41,9 @@ export function updateHistoryTag() {
 }
 export function search(tagName, startIndex = 1) {
   return (dispatch) => {
+    tagName = tagName.toLowerCase();
     dispatch(searchStart());
     const searchByTagUrl = API_URLS.searchByTag(tagName, startIndex);
-    console.log('url', tagName);
     fetch(searchByTagUrl, {
       method: 'POST',
       headers: {
@@ -53,22 +53,24 @@ export function search(tagName, startIndex = 1) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log('ok 2', data);
         if (data.success) {
-          historyFunction.addTagToHistory(tagName);
-          dispatch(updateHistoryTag());
-          if (parseInt(startIndex) === 1) {
-            dispatch(
-              searchSuccess(
-                data.data.blogsArray,
-                data.data.releatedTags,
-                tagName
-              )
-            );
-          } else {
-            dispatch(searchAgain(data.data.blogsArray));
+          if (data.data.releatedTags && data.data.releatedTags.length > 0) {
+            historyFunction.addTagToHistory(tagName);
+            dispatch(updateHistoryTag());
+            if (parseInt(startIndex) === 1) {
+              dispatch(
+                searchSuccess(
+                  data.data.blogsArray,
+                  data.data.releatedTags,
+                  tagName
+                )
+              );
+            } else {
+              dispatch(searchAgain(data.data.blogsArray));
+            }
+
+            return;
           }
-          return;
         }
         dispatch(searchFailure(data.message));
       })
