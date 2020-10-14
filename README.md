@@ -3,8 +3,8 @@
 In the project directory, you can run:
 
 ### `npm start`
-live on  https://join-us-8fa0c.web.app
-Runs the app in the development mode.<br />
+host on  https://join-us-8fa0c.web.app
+
 
 
 Video link https://drive.google.com/file/d/1nbDjzFD8SO645qgB7Trfdzem4ffzA97r/view?usp=sharing
